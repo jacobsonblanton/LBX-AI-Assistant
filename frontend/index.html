@@ -1,0 +1,34 @@
+# ========================
+# STEP 4: Frontend (Simple HTML)
+# ========================
+# File: frontend/index.html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AI Assistant</title>
+    <script>
+        async function sendQuery() {
+            const query = document.getElementById("query").value;
+            const res = await fetch("http://localhost:8000/ask", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ query })
+            });
+            const data = await res.json();
+            document.getElementById("response").innerText = data.response;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>My AI Assistant</h1>
+    <textarea id="query"
+              rows="5"
+              cols="60"></textarea><br>
+    <button onclick="sendQuery()">Ask</button>
+    <h3>Response:</h3>
+    <p id="response"></p>
+</body>
+
+</html>
